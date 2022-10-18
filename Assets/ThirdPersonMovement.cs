@@ -18,6 +18,11 @@ public class ThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime;
     float turnSmoothVelocity;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     private void Update()
     {
         var gamepad = Gamepad.current;

@@ -66,10 +66,11 @@
     <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
     <Compile Include="Assets\StarterAssets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\ThirdPersonMovement.cs" />
     <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\CharacterTemplate.cs" />
     <Compile Include="Assets\PlayerController.cs" />
-    <Compile Include="Assets\ThirdPersonMovement.cs" />
+    <Compile Include="Assets\AOECastRadius.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\StarterAssets\Environment\Shaders\Built-in_RP\Triplanar.shader" />
