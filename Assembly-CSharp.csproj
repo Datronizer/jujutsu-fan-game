@@ -57,25 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualButton.cs" />
-    <Compile Include="Assets\StarterAssets\InputSystem\StarterAssetsInputs.cs" />
-    <Compile Include="Assets\StarterAssets\Mobile\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
-    <Compile Include="Assets\StarterAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
-    <Compile Include="Assets\StarterAssets\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
-    <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\BasicRigidBodyPush.cs" />
-    <Compile Include="Assets\StarterAssets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\AOECastRadius.cs" />
     <Compile Include="Assets\ThirdPersonMovement.cs" />
-    <Compile Include="Assets\StarterAssets\ThirdPersonController\Scripts\ThirdPersonController.cs" />
     <Compile Include="Assets\Scripts\CharacterTemplate.cs" />
     <Compile Include="Assets\PlayerController.cs" />
-    <Compile Include="Assets\AOECastRadius.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\StarterAssets\Environment\Shaders\Built-in_RP\Triplanar.shader" />
-    <None Include="Assets\StarterAssets\license.txt" />
-    <None Include="Assets\StarterAssets\Environment\Shaders\Built-in_RP\ArmatureShader.shader" />
+    <Compile Include="Assets\InputSystems\NanamiInputActions.cs" />
+    <Compile Include="Assets\PlayerController_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
