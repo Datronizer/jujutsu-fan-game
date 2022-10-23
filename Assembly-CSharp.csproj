@@ -56,14 +56,11 @@
     <Analyzer Include="D:\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\AOECastRadius.cs" />
-    <Compile Include="Assets\ThirdPersonMovement.cs" />
+    <Compile Include="Assets\Scripts\AOECastRadius.cs" />
     <Compile Include="Assets\Scripts\CharacterTemplate.cs" />
-    <Compile Include="Assets\PlayerController.cs" />
-    <Compile Include="Assets\InputSystems\NanamiInputActions.cs" />
-    <Compile Include="Assets\PlayerController_Test.cs" />
+    <Compile Include="Assets\Scripts\PlayerControllerGeneral.cs" />
+    <Compile Include="Assets\InputSystems\BasicPlayerInputActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

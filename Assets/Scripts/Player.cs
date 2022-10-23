@@ -11,12 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isPlayer;
     [SerializeField] CharacterTemplate characterTemplate;
 
-    private PlayerMovement playerMoverment;
+    //private PlayerMovement playerMoverment;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.playerMoverment = GetComponent<PlayerMovement>();
+        //this.playerMoverment = GetComponent<PlayerMovement>();
 
         this.health = 100;
         this.mana = 200;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        this.characterTemplate.Init(health, mana, stamina);
-        this.characterTemplate.AssignController(isPlayer, playerMoverment);
+        //this.characterTemplate.Init(health, mana, stamina);
+        //this.characterTemplate.AssignController(isPlayer, playerMoverment);
     }
 }

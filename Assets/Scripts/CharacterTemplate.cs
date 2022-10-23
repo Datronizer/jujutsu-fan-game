@@ -13,22 +13,22 @@ public class CharacterTemplate : MonoBehaviour
     private int mana;
     private int stamina;
 
-    private PlayerMovement playerMovement;
+    //private PlayerMovement playerMovement;
 
-    public void Init(int health, int mana, int stamina)
-    {
-        this.health = health;
-        this.mana = mana;
-        this.stamina = stamina;
-    }
+    //public void Init(int health, int mana, int stamina)
+    //{
+    //    this.health = health;
+    //    this.mana = mana;
+    //    this.stamina = stamina;
+    //}
 
-    public void AssignController(bool isPlayer, PlayerMovement playerMovement)
-    {
-        this.isPlayer = isPlayer;
+    //public void AssignController(bool isPlayer, PlayerMovement playerMovement)
+    //{
+    //    this.isPlayer = isPlayer;
 
-        if (this.isPlayer)
-        {
-            this.playerMovement = GetComponent<PlayerMovement>();
-        }
-    }
+    //    if (this.isPlayer)
+    //    {
+    //        this.playerMovement = GetComponent<PlayerMovement>();
+    //    }
+    //}
 }
