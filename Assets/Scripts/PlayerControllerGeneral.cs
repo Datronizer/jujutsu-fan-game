@@ -7,35 +7,28 @@ public class PlayerControllerGeneral : MonoBehaviour
     //input fields
     private BasicPlayerInputActions basicPlayerInputActions;
     private InputAction movement;
+    private InputAction sprint;
 
     //movement fields
     //private Rigidbody rb;
     private CharacterController characterController;
 
-    //[SerializeField] private CharacterController controller;
-    [SerializeField] private float movementForce = 1f;
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float maxSpeed = 5f;
+    //camera
     [SerializeField] private Camera playerCamera;
-    private Vector3 forceDirection = Vector3.zero; // This guides the player where to move after a force is applied
-
-    // Other variables
-
-    public float sprintSpeed;
-    public bool isSprinting;
 
     //math-specific variables
     private float moveSpeed = 6.0f;
-    private float jumpHeight = 2.0f;
-    private float gravityCoefficient = 9.81f;
-    private float terminalVelocity = -10f;
+    private readonly float jumpHeight = 1.0f;
+    private readonly float gravityCoefficient = 9.81f;
 
     private Vector3 moveDirection;
     private Vector3 velocity;
-    private Vector3 acceleration;
 
-    private float turnSmoothTime = 0.1f;
+    private readonly float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
+
+    private float sprintCoefficient;
+    private bool isSprinting;
 
     private void Awake()
     {
@@ -48,6 +41,7 @@ public class PlayerControllerGeneral : MonoBehaviour
     {
         basicPlayerInputActions.Player.Jump.performed += DoJump; // No need to constantly check if jump is pressed. It checks when pressed instead.
         movement = basicPlayerInputActions.Player.Movement;
+        sprint = basicPlayerInputActions.Player.Sprint;
         basicPlayerInputActions.Player.Enable();
     }
 
@@ -55,13 +49,16 @@ public class PlayerControllerGeneral : MonoBehaviour
     {
         basicPlayerInputActions.Player.Jump.performed -= DoJump;
         basicPlayerInputActions.Player.Disable();
-
     }
 
     private void FixedUpdate()
     {
+        //if you're already on the ground, stop falling
         if (characterController.isGrounded && velocity.y < 0)
-            velocity.y = 0f; //if you're already on the ground, stop falling
+            velocity.y = 0f;
+
+        isSprinting = sprint.enabled;
+        sprintCoefficient = isSprinting ? 2f : 1f;
 
         // Checks if character is moving
         float horizontal = movement.ReadValue<Vector2>().x;
@@ -76,37 +73,12 @@ public class PlayerControllerGeneral : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDirectionFromCam = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            characterController.Move(moveSpeed * Time.deltaTime * moveDirectionFromCam.normalized);
+            characterController.Move(moveSpeed * Time.deltaTime * moveDirectionFromCam.normalized * sprintCoefficient);
         }
 
         // Artificially applies gravity
         velocity.y -= gravityCoefficient * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
-    }
-
-    //private void LookAt()
-    //{
-    //    Vector3 direction = rb.velocity;
-    //    direction.y = 0f;
-
-    //    if (movement.ReadValue<Vector2>().sqrMagnitude > 0.1f && direction.sqrMagnitude > 0.1f)
-    //        this.rb.rotation = Quaternion.LookRotation(direction, Vector3.up);
-    //    else
-    //        rb.angularVelocity = Vector3.zero;
-    //}
-
-    private Vector3 GetCameraForward(Camera playerCamera)
-    {
-        Vector3 forward = playerCamera.transform.forward;
-        forward.y = 0;
-        return forward.normalized;
-    }
-
-    private Vector3 GetCameraRight(Camera playerCamera)
-    {
-        Vector3 right = playerCamera.transform.right;
-        right.y = 0;
-        return right.normalized;
+        characterController.Move(velocity * (float)Math.Exp(Time.deltaTime) * 0.125f);
     }
 
     private void DoJump(InputAction.CallbackContext obj)
@@ -114,41 +86,10 @@ public class PlayerControllerGeneral : MonoBehaviour
         if (characterController.isGrounded)
         {
             Debug.Log("Jump!!");
-            velocity.y = 0;
-            velocity.y += Mathf.Sqrt(jumpHeight * 2.0f * gravityCoefficient);
+            velocity.y += Mathf.Sqrt(jumpHeight * 1.0f * gravityCoefficient);
         }
         else
             Debug.Log("You're hitting jump, but you're not touching the ground");
 
     }
-
-    private bool IsGrounded()
-    {
-        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 2.2f)) // set the float to character displacement + 0.3f. For example, center of a 3.6m capsule is 1.8 so it's 1.8 + 0.3 = 2.1f
-            return true;
-        else
-            return false;
-    }
-
-    //// TODO: Figure out why while jumping, if you move, it freezes the jump height. Probably has something to do with the vector 3 we chose.
-    //public void DoMove(Vector2 moveDirection)
-    //{
-    //    //isSprinting = gamepad.leftStickButton.IsPressed();
-
-    //    //sprintSpeed = isSprinting ? 2f : 1f;
-    //    //turnSmoothTime = isSprinting ? 0.1f : 0.1f; // will look at this later
-
-    //    Vector3 direction = new Vector3(moveDirection.x, 0f, moveDirection.y).normalized;
-
-    //    if (direction.x != 0 || direction.z != 0) // prevent auto clipping back to 90deg angle when stopped
-    //    {
-    //        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-    //        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-    //        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
-    //        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-    //        controller.Move(moveSpeed /** sprintSpeed*/ * Time.deltaTime * moveDir.normalized);
-    //    }
-    //}
 }
