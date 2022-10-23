@@ -6,8 +6,7 @@ public class PlayerControllerGeneral : MonoBehaviour
 {
     //input fields
     private BasicPlayerInputActions basicPlayerInputActions;
-    private InputAction movement;
-    private InputAction sprint;
+    private InputAction movement, sprint, attack;
 
     //movement fields
     //private Rigidbody rb;
@@ -40,6 +39,7 @@ public class PlayerControllerGeneral : MonoBehaviour
     private void OnEnable()
     {
         basicPlayerInputActions.Player.Jump.performed += DoJump; // No need to constantly check if jump is pressed. It checks when pressed instead.
+        basicPlayerInputActions.Player.Attack.performed += DoAttack;
         movement = basicPlayerInputActions.Player.Movement;
         sprint = basicPlayerInputActions.Player.Sprint;
         basicPlayerInputActions.Player.Enable();
@@ -90,6 +90,12 @@ public class PlayerControllerGeneral : MonoBehaviour
         }
         else
             Debug.Log("You're hitting jump, but you're not touching the ground");
+    }
 
+    //TODO: Have a script for attack chain so that it can be limited. 
+    private void DoAttack(InputAction.CallbackContext obj)
+    {
+        print("Hyah!");
+        BroadcastMessage("__TakeDamage", 15f, SendMessageOptions.DontRequireReceiver);
     }
 }

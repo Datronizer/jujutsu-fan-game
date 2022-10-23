@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 8335679888491648394}
   - component: {fileID: 7111587933567641767}
   - component: {fileID: 8335679888491648406}
+  - component: {fileID: 2302458283344770619}
   m_Layer: 0
   m_Name: Third Person Player
   m_TagString: CinemachineTarget
@@ -161,12 +162,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644f657c9e99d8f47ac84c2117cf9742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 1
-  jumpForce: 15
-  maxSpeed: 8
   playerCamera: {fileID: 0}
-  sprintSpeed: 0
-  isSprinting: 0
+--- !u!114 &2302458283344770619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8335679888491648395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed2cfd17351ab5b45bc33dd659d4302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8335679889525764827
 GameObject:
   m_ObjectHideFlags: 0
